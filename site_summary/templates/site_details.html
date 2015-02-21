@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Site Details</title>
+        <meta name="viewport" content="width=520, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    </head>
+
+    <body>
+
+          <nav class="navbar navbar-default">
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" >
+                    <li class="active" >
+                            <a href="/sites">Sites</a>
+                    </li>
+                    <li>
+                            <a href="/summary-sum">Summary</a>
+                    </li>
+                </ul>
+              </div>
+          </nav>
+
+          <div class="container">
+                {% if site %}
+                    <h1>Site Details - {{ site.name }}</h1>
+                    {% if site_entries %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>A Value</strong></td>
+                                    <td><strong>B Value</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for entry in site_entries %}
+                                <tr>
+                                    <td>{{ entry.date|date:"M d, Y" }}</td>
+                                    <td>{{ entry.a_value|floatformat:2}}</td>
+                                    <td>{{ entry.b_value|floatformat:2}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No entries are available.</p>
+                    {% endif %}
+                {% else %}
+                    <p>Unknown site.</p>
+                {% endif %}
+        </div>
+
+    </body>
+</html>
